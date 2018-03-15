@@ -29,7 +29,7 @@ export const getObject = (root, loaders, url, args, id = true) =>
         : loaders.data.load(`${url}${extendingId(args)}`)
 
 
-function sortObjectsById(array: { id: number }[]): Object[] {
+function sortObjectsById(array) {
     return array.sort((a, b) => a.id - b.id);
 }
 
