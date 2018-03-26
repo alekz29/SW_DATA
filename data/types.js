@@ -49,7 +49,7 @@ const types = {
                 'characters',
                 types.PersonType,
             ),
-               id: globalIdField('films'),
+            id: globalIdField('films'),
 
             //   interfaces: () => [nodeInterface],
         }),

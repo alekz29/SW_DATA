@@ -1,4 +1,9 @@
-node_modules
+/node_modules
 .DS_Store
 /dist
 .idea
+/lib
+__generated__/
+/coverage
+/build
+.env.local

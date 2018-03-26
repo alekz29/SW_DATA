@@ -4,9 +4,10 @@
   "description": "",
   "main": "./index.js",
   "scripts": {
-    "compile": "webpack",
-    "build": "webpack -p",
+    "build": "relay-compiler --src ./js/ --schema ./data/schema.graphql",
+    "update-schema": "babel-node ./data/updateSchema.js",
     "start": "babel-node ./server.js"
+
   },
   "keywords": [
     "react",

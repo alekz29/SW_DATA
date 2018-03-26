@@ -1,138 +1,137 @@
-input AddTodoInput {
-    text: String!
-    clientMutationId: String
-}
+"""A single film."""
+type Film {
+    """The title of this film."""
+    title: String
+    characterConnection(after: String, first: Int, before: String, last: Int): FilmCharactersConnection
 
-type AddTodoPayload {
-    todoEdge: TodoEdge
-    viewer: User
-    clientMutationId: String
-}
-
-input ChangeTodoStatusInput {
-    complete: Boolean!
-    id: ID!
-    clientMutationId: String
-}
-
-type ChangeTodoStatusPayload {
-    todo: Todo
-    viewer: User
-    clientMutationId: String
-}
-
-input MarkAllTodosInput {
-    complete: Boolean!
-    clientMutationId: String
-}
-
-type MarkAllTodosPayload {
-    changedTodos: [Todo]
-    viewer: User
-    clientMutationId: String
-}
-
-type Mutation {
-    addTodo(input: AddTodoInput!): AddTodoPayload
-    changeTodoStatus(input: ChangeTodoStatusInput!): ChangeTodoStatusPayload
-    markAllTodos(input: MarkAllTodosInput!): MarkAllTodosPayload
-    removeCompletedTodos(input: RemoveCompletedTodosInput!): RemoveCompletedTodosPayload
-    removeTodo(input: RemoveTodoInput!): RemoveTodoPayload
-    renameTodo(input: RenameTodoInput!): RenameTodoPayload
-}
-
-# An object with an ID
-interface Node {
-    # The id of the object.
+    """The ID of an object"""
     id: ID!
 }
 
-# Information about pagination in a connection.
-type PageInfo {
-    # When paginating forwards, are there more items?
-    hasNextPage: Boolean!
-
-    # When paginating backwards, are there more items?
-    hasPreviousPage: Boolean!
-
-    # When paginating backwards, the cursor to continue.
-    startCursor: String
-
-    # When paginating forwards, the cursor to continue.
-    endCursor: String
-}
-
-type Query {
-    viewer: User
-
-    # Fetches an object given its ID
-    node(
-        # The ID of an object
-        id: ID!
-    ): Node
-}
-
-input RemoveCompletedTodosInput {
-    clientMutationId: String
-}
-
-type RemoveCompletedTodosPayload {
-    deletedTodoIds: [String]
-    viewer: User
-    clientMutationId: String
-}
-
-input RemoveTodoInput {
-    id: ID!
-    clientMutationId: String
-}
-
-type RemoveTodoPayload {
-    deletedTodoId: ID
-    viewer: User
-    clientMutationId: String
-}
-
-input RenameTodoInput {
-    id: ID!
-    text: String!
-    clientMutationId: String
-}
-
-type RenameTodoPayload {
-    todo: Todo
-    clientMutationId: String
-}
-
-type Todo implements Node {
-    # The ID of an object
-    id: ID!
-    text: String
-    complete: Boolean
-}
-
-# A connection to a list of items.
-type TodoConnection {
-    # Information to aid in pagination.
+"""A connection to a list of items."""
+type FilmCharactersConnection {
+    """Information to aid in pagination."""
     pageInfo: PageInfo!
 
-    # A list of edges.
-    edges: [TodoEdge]
+    """A list of edges."""
+    edges: [FilmCharactersEdge]
+    characters: [Person]
 }
 
-# An edge in a connection.
-type TodoEdge {
-    # The item at the end of the edge
-    node: Todo
+"""An edge in a connection."""
+type FilmCharactersEdge {
+    """The item at the end of the edge"""
+    node: Person
 
-    # A cursor for use in pagination
+    """A cursor for use in pagination"""
     cursor: String!
 }
 
-type User implements Node {
-    # The ID of an object
+"""A connection to a list of items."""
+type FilmsConnection {
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+
+    """A list of edges."""
+    edges: [FilmsEdge]
+    films: [Film]
+}
+
+"""An edge in a connection."""
+type FilmsEdge {
+    """The item at the end of the edge"""
+    node: Film
+
+    """A cursor for use in pagination"""
+    cursor: String!
+}
+
+"""An object with an ID"""
+interface Node {
+    """The id of the object."""
     id: ID!
-    todos(status: String = "any", after: String, first: Int, before: String, last: Int): TodoConnection
-    totalCount: Int
-    completedCount: Int
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+    """When paginating forwards, are there more items?"""
+    hasNextPage: Boolean!
+
+    """When paginating backwards, are there more items?"""
+    hasPreviousPage: Boolean!
+
+    """When paginating backwards, the cursor to continue."""
+    startCursor: String
+
+    """When paginating forwards, the cursor to continue."""
+    endCursor: String
+}
+
+"""A connection to a list of items."""
+type PeopleConnection {
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+
+    """A list of edges."""
+    edges: [PeopleEdge]
+    people: [Person]
+}
+
+"""An edge in a connection."""
+type PeopleEdge {
+    """The item at the end of the edge"""
+    node: Person
+
+    """A cursor for use in pagination"""
+    cursor: String!
+}
+
+"""..."""
+type Person {
+    """The name of this person."""
+    name: String
+    height: Int
+    id: ID
+    homeworld: Planet
+}
+
+"""..."""
+type Planet {
+    """The name of this planet."""
+    name: String
+}
+
+"""A connection to a list of items."""
+type PlanetsConnection {
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+
+    """A list of edges."""
+    edges: [PlanetsEdge]
+    planets: [Planet]
+}
+
+"""An edge in a connection."""
+type PlanetsEdge {
+    """The item at the end of the edge"""
+    node: Planet
+
+    """A cursor for use in pagination"""
+    cursor: String!
+}
+
+"""..."""
+type Query {
+    allFilms(after: String, first: Int, before: String, last: Int): FilmsConnection
+    film(id: ID, filmID: ID): Film
+    allPeople(after: String, first: Int, before: String, last: Int): PeopleConnection
+    person(id: ID, personID: ID): Person
+    allPlanets(after: String, first: Int, before: String, last: Int): PlanetsConnection
+    planet(id: ID, planetID: ID): Planet
+
+    """Fetches an object given its ID"""
+    node(
+        """The ID of an object"""
+        id: ID!
+    ): Node
 }
