@@ -4,8 +4,8 @@
   "description": "",
   "main": "./index.js",
   "scripts": {
-    "build": "relay-compiler --src ./js/ --schema ./data/schema.graphql",
     "update-schema": "babel-node ./data/updateSchema.js",
+    "build": "relay-compiler --src ./js/ --schema ./data/schema.graphql",
     "start": "babel-node ./server.js"
 
   },

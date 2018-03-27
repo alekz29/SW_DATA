@@ -1,137 +1,137 @@
 """A single film."""
 type Film {
-    """The title of this film."""
-    title: String
-    characterConnection(after: String, first: Int, before: String, last: Int): FilmCharactersConnection
+  """The title of this film."""
+  title: String
+  characterConnection(after: String, first: Int, before: String, last: Int): FilmCharactersConnection
 
-    """The ID of an object"""
-    id: ID!
+  """The ID of an object"""
+  id: ID!
 }
 
 """A connection to a list of items."""
 type FilmCharactersConnection {
-    """Information to aid in pagination."""
-    pageInfo: PageInfo!
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
 
-    """A list of edges."""
-    edges: [FilmCharactersEdge]
-    characters: [Person]
+  """A list of edges."""
+  edges: [FilmCharactersEdge]
+  characters: [Person]
 }
 
 """An edge in a connection."""
 type FilmCharactersEdge {
-    """The item at the end of the edge"""
-    node: Person
+  """The item at the end of the edge"""
+  node: Person
 
-    """A cursor for use in pagination"""
-    cursor: String!
+  """A cursor for use in pagination"""
+  cursor: String!
 }
 
 """A connection to a list of items."""
 type FilmsConnection {
-    """Information to aid in pagination."""
-    pageInfo: PageInfo!
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
 
-    """A list of edges."""
-    edges: [FilmsEdge]
-    films: [Film]
+  """A list of edges."""
+  edges: [FilmsEdge]
+  films: [Film]
 }
 
 """An edge in a connection."""
 type FilmsEdge {
-    """The item at the end of the edge"""
-    node: Film
+  """The item at the end of the edge"""
+  node: Film
 
-    """A cursor for use in pagination"""
-    cursor: String!
+  """A cursor for use in pagination"""
+  cursor: String!
 }
 
 """An object with an ID"""
 interface Node {
-    """The id of the object."""
-    id: ID!
+  """The id of the object."""
+  id: ID!
 }
 
 """Information about pagination in a connection."""
 type PageInfo {
-    """When paginating forwards, are there more items?"""
-    hasNextPage: Boolean!
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
 
-    """When paginating backwards, are there more items?"""
-    hasPreviousPage: Boolean!
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
 
-    """When paginating backwards, the cursor to continue."""
-    startCursor: String
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 
-    """When paginating forwards, the cursor to continue."""
-    endCursor: String
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
 }
 
 """A connection to a list of items."""
 type PeopleConnection {
-    """Information to aid in pagination."""
-    pageInfo: PageInfo!
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
 
-    """A list of edges."""
-    edges: [PeopleEdge]
-    people: [Person]
+  """A list of edges."""
+  edges: [PeopleEdge]
+  people: [Person]
 }
 
 """An edge in a connection."""
 type PeopleEdge {
-    """The item at the end of the edge"""
-    node: Person
+  """The item at the end of the edge"""
+  node: Person
 
-    """A cursor for use in pagination"""
-    cursor: String!
+  """A cursor for use in pagination"""
+  cursor: String!
 }
 
 """..."""
 type Person {
-    """The name of this person."""
-    name: String
-    height: Int
-    id: ID
-    homeworld: Planet
+  """The name of this person."""
+  name: String
+  height: Int
+  id: ID
+  homeworld: Planet
 }
 
 """..."""
 type Planet {
-    """The name of this planet."""
-    name: String
+  """The name of this planet."""
+  name: String
 }
 
 """A connection to a list of items."""
 type PlanetsConnection {
-    """Information to aid in pagination."""
-    pageInfo: PageInfo!
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
 
-    """A list of edges."""
-    edges: [PlanetsEdge]
-    planets: [Planet]
+  """A list of edges."""
+  edges: [PlanetsEdge]
+  planets: [Planet]
 }
 
 """An edge in a connection."""
 type PlanetsEdge {
-    """The item at the end of the edge"""
-    node: Planet
+  """The item at the end of the edge"""
+  node: Planet
 
-    """A cursor for use in pagination"""
-    cursor: String!
+  """A cursor for use in pagination"""
+  cursor: String!
 }
 
 """..."""
 type Query {
-    allFilms(after: String, first: Int, before: String, last: Int): FilmsConnection
-    film(id: ID, filmID: ID): Film
-    allPeople(after: String, first: Int, before: String, last: Int): PeopleConnection
-    person(id: ID, personID: ID): Person
-    allPlanets(after: String, first: Int, before: String, last: Int): PlanetsConnection
-    planet(id: ID, planetID: ID): Planet
+  allFilms(after: String, first: Int, before: String, last: Int): FilmsConnection
+  film(id: ID, filmID: ID): Film
+  allPeople(after: String, first: Int, before: String, last: Int): PeopleConnection
+  person(id: ID, personID: ID): Person
+  allPlanets(after: String, first: Int, before: String, last: Int): PlanetsConnection
+  planet(id: ID, planetID: ID): Planet
 
-    """Fetches an object given its ID"""
-    node(
-        """The ID of an object"""
-        id: ID!
-    ): Node
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
 }

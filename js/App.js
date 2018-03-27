@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/person';
-
+import CharacterListPage from './components/CharacterListPage';
 
 
 ReactDOM.render(
-    <App/>,
+    <CharacterListPage/>,
     document.getElementById('root')
 );
