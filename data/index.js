@@ -2,7 +2,8 @@ import {
     GraphQLSchema,
     GraphQLObjectType,
     GraphQLID,
-    GraphQLList
+    GraphQLList,
+    GraphQLInt
 } from 'graphql';
 import {
     fromGlobalId,
@@ -48,6 +49,10 @@ function rootConnection(name, swapiType) {
         name,
         nodeType: graphqlType,
         connectionFields: () => ({
+            totalCount:{
+                type:GraphQLInt,
+                resolve:conn =>conn.totalCount,
+            },
             [swapiType]: {
                 type: new GraphQLList(graphqlType),
                 resolve: conn => conn.edges.map(edge => edge.node),
@@ -57,10 +62,11 @@ function rootConnection(name, swapiType) {
     return {
         type: connectionType,
         args: connectionArgs,
-        resolve: async (root, args, {loaders}) => {
-            const {objects} = await getObjectsByType(swapiType, root, loaders);
+        resolve: async (_,args) => {
+            const {objects,totalCount} = await getObjectsByType(swapiType);
             return {
                 ...connectionFromArray(objects, args),
+                totalCount,
             };
         },
     };

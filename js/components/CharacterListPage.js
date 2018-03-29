@@ -7,8 +7,11 @@ import environment from '../Environment'
 import CharacterList from "./CharacterList";
 
 const CharacterListPageQuery = graphql`
-    query CharacterListPageQuery{
-        ...CharacterList_date
+    query CharacterListPageQuery(
+    $count:Int!,
+    $after:String
+    ){
+        ...CharacterList_data
     }
 `
 
@@ -17,8 +20,10 @@ export default class CharacterListPage extends React.Component {
         return (
             <QueryRenderer
                 environment={environment}
+                variables={{
+                    count:10,
+                }}
                 query={CharacterListPageQuery}
-                variables={{}}
                 render={({error, props}) => {
                     if (error) {
                         return <div>Error!</div>;
@@ -28,7 +33,7 @@ export default class CharacterListPage extends React.Component {
                     }
                     return (
                         <div>
-                            <CharacterList date={props}/>
+                            <CharacterList data={props}/>
                         </div>
                     )
                 }}
@@ -36,3 +41,7 @@ export default class CharacterListPage extends React.Component {
         );
     }
 }
+
+/*
+
+*/

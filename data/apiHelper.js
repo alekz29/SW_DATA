@@ -64,5 +64,5 @@ export async function getObjectsByType(type) {
         nextUrl = pageData.next;
     }
     objects = sortObjectsById(objects);
-    return {objects};
+    return {objects,totalCount: objects.length};
 }

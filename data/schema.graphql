@@ -34,6 +34,7 @@ type FilmsConnection {
 
   """A list of edges."""
   edges: [FilmsEdge]
+  totalCount: Int
   films: [Film]
 }
 
@@ -74,6 +75,7 @@ type PeopleConnection {
 
   """A list of edges."""
   edges: [PeopleEdge]
+  totalCount: Int
   people: [Person]
 }
 
@@ -108,6 +110,7 @@ type PlanetsConnection {
 
   """A list of edges."""
   edges: [PlanetsEdge]
+  totalCount: Int
   planets: [Planet]
 }
 
