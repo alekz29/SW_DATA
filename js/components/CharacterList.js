@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {createPaginationContainer, graphql} from 'react-relay'
 import Character from './Character'
+import {ButtonToolbar, Button} from 'react-bootstrap'
 
 class CharactersList extends Component {
 
@@ -18,14 +19,14 @@ class CharactersList extends Component {
     render() {
         return (
             <div>
-                <div>
+                <Button className={'btn'} onClick={() => this._loadMore()}>
+                    MORE
+                </Button>
+                <div className={'character_list'}>
                     {
                         this.props.data.allPeople.edges.map(({node}) =>
                             <Character key={node.__id} character={node}/>)
                     }
-                </div>
-                <div>
-                    <div onClick={() => this._loadMore()}>Next</div>
                 </div>
             </div>
         )
@@ -38,24 +39,27 @@ export default createPaginationContainer(CharactersList,
             fragment CharacterList_data on Query{
                 allPeople(
                     first:$count,
-                    after:$after,
+                    after:$cursor,
                 ) @connection(key:"CharacterList_allPeople",filters:[]){
                     edges{
                         node{
                             ...Character_character
                         }
                     }
+                    pageInfo{
+                        endCursor
+                        hasNextPage
+                    }
                 }
             }
         `
     },
-
     {
         direction: 'forward',
         query: graphql`
             query CharacterListForwardQuery(
             $count: Int!,
-            $after: String,
+            $cursor: String,
             ){
                 ...CharacterList_data
             }
@@ -72,7 +76,7 @@ export default createPaginationContainer(CharactersList,
         getVariables(props, paginationInfo, fragmentVariables) {
             return {
                 count: paginationInfo.count,
-                after: paginationInfo.cursor,
+                cursor: paginationInfo.cursor,
             }
         },
     }

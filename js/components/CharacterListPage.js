@@ -9,7 +9,7 @@ import CharacterList from "./CharacterList";
 const CharacterListPageQuery = graphql`
     query CharacterListPageQuery(
     $count:Int!,
-    $after:String
+    $cursor:String
     ){
         ...CharacterList_data
     }
@@ -21,7 +21,8 @@ export default class CharacterListPage extends React.Component {
             <QueryRenderer
                 environment={environment}
                 variables={{
-                    count:10,
+                    count: 10,
+                    cursor: ""
                 }}
                 query={CharacterListPageQuery}
                 render={({error, props}) => {
@@ -29,10 +30,10 @@ export default class CharacterListPage extends React.Component {
                         return <div>Error!</div>;
                     }
                     if (!props) {
-                        return <div>Loading...</div>;
+                        return <div className={'dataFetcher'}>Loading...</div>;
                     }
                     return (
-                        <div>
+                        <div className={'list'}>
                             <CharacterList data={props}/>
                         </div>
                     )
@@ -41,7 +42,3 @@ export default class CharacterListPage extends React.Component {
         );
     }
 }
-
-/*
-
-*/
