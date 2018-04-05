@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {createPaginationContainer, graphql} from 'react-relay'
 import Character from './Character'
-import {ButtonToolbar, Button} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 
 class CharactersList extends Component {
 
