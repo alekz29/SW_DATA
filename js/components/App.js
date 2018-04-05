@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import HomeView from './views/HomeView'
 import {Switch, Route} from 'react-router-dom'
-import CharacterListPage from './CharacterListPage'
+import Menu from './Menu'
+import CharactersView from "./views/CharactersView";
 
 class App extends Component {
     render() {
@@ -9,10 +9,10 @@ class App extends Component {
             <div>
                 <header className={'header'}> STAR WARS-img</header>
                 <section className={'content'}>
-                    <HomeView/>
+                    <Menu/>
                     <div>
                         <Switch>
-                            <Route exact path='/characters' component={CharacterListPage}/>
+                            <Route path="/characters/:productId" component={CharactersView}/>
                         </Switch>
                     </div>
                 </section>

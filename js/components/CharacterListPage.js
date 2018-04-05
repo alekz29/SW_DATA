@@ -10,19 +10,25 @@ const CharacterListPageQuery = graphql`
     query CharacterListPageQuery(
     $count:Int!,
     $cursor:String
+    $id:ID!
     ){
-        ...CharacterList_data
+        film(filmID:$id){
+            ...CharacterList_film
+        }
     }
 `
 
 export default class CharacterListPage extends React.Component {
+
     render() {
+        const episodeId = parseInt(this.props.item, 10);
         return (
             <QueryRenderer
                 environment={environment}
                 variables={{
                     count: 10,
-                    cursor: ""
+                    cursor: "",
+                    id: episodeId,
                 }}
                 query={CharacterListPageQuery}
                 render={({error, props}) => {
@@ -34,7 +40,7 @@ export default class CharacterListPage extends React.Component {
                     }
                     return (
                         <div className={'list'}>
-                            <CharacterList data={props}/>
+                            <CharacterList film={props.film} id={episodeId}/>
                         </div>
                     )
                 }}

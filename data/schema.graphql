@@ -3,9 +3,7 @@ type Film {
   """The title of this film."""
   title: String
   characterConnection(after: String, first: Int, before: String, last: Int): FilmCharactersConnection
-
-  """The ID of an object"""
-  id: ID!
+  id: ID
 }
 
 """A connection to a list of items."""

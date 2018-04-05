@@ -64,12 +64,14 @@ body {
     height: 100%;
 }
 
-.loader {
+.loaderEpisode {
     font: inherit;
     color: #E2D872;;
+    margin:auto;
+    text-align: center;
 }
 
-.loader:hover {
+.loaderEpisode:hover {
     color: #fff8c6;
 }
 
@@ -96,4 +98,10 @@ body {
     font-weight: bold;
     display: flex;
     justify-content: center;
+}
+.menu{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    color:white;
 }

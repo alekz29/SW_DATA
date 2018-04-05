@@ -24,7 +24,7 @@ class CharactersList extends Component {
                 </Button>
                 <div className={'character_list'}>
                     {
-                        this.props.data.allPeople.edges.map(({node}) =>
+                        this.props.film.characterConnection.edges.map(({node}) =>
                             <Character key={node.__id} character={node}/>)
                     }
                 </div>
@@ -35,12 +35,12 @@ class CharactersList extends Component {
 
 export default createPaginationContainer(CharactersList,
     {
-        data: graphql`
-            fragment CharacterList_data on Query{
-                allPeople(
+        film: graphql`
+            fragment CharacterList_film on Film{
+                characterConnection(
                     first:$count,
                     after:$cursor,
-                ) @connection(key:"CharacterList_allPeople",filters:[]){
+                ) @connection(key:"CharacterList_characterConnection",filters:[]){
                     edges{
                         node{
                             ...Character_character
@@ -60,12 +60,15 @@ export default createPaginationContainer(CharactersList,
             query CharacterListForwardQuery(
             $count: Int!,
             $cursor: String,
+            $id:ID!
             ){
-                ...CharacterList_data
+                film(filmID:$id){
+                    ...CharacterList_film
+                }
             }
         `,
         getConnectionFromProps(props) {
-            return props.data && props.data.allPeople
+            return props.film && props.film.characterConnection
         },
         getFragmentVariables(previousVariables, totalCount) {
             return {
@@ -77,6 +80,7 @@ export default createPaginationContainer(CharactersList,
             return {
                 count: paginationInfo.count,
                 cursor: paginationInfo.cursor,
+                id: props.id
             }
         },
     }

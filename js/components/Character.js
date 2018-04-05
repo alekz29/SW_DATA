@@ -16,6 +16,7 @@ class Character extends Component {
 export default createFragmentContainer(Character, graphql`
     fragment Character_character on Person{
         name
+        id
     }
 `)
 
