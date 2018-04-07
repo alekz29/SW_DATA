@@ -1,0 +1,24 @@
+.menu {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: auto;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    background: url("http://s5.ifotos.pl/img/mainNavpn_qnspaah.png") no-repeat 100%;
+    background-size: cover;
+}
+@media only screen and (max-width: 1250px) {
+    .menu {
+        background: rgb(34, 34, 34);
+
+    }
+}
+@media only screen and (max-width: 550px) {
+    .menu {
+        display: flex;
+        flex-direction: column;
+    }
+}

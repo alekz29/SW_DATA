@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {createPaginationContainer, graphql} from 'react-relay'
 import Character from './Character'
 import {Button} from 'react-bootstrap'
+import '../styles/CharacterList.css'
 
 class CharactersList extends Component {
 
@@ -22,7 +23,7 @@ class CharactersList extends Component {
                 <Button className={'btn'} onClick={() => this._loadMore()}>
                     MORE
                 </Button>
-                <div className={'character_list'}>
+                <div className={'characterList_List'}>
                     {
                         this.props.film.characterConnection.edges.map(({node}) =>
                             <Character key={node.__id} character={node}/>)

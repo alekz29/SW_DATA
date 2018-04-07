@@ -12,19 +12,20 @@ import {
     connectionDefinitions,
 } from 'graphql-relay';
 import {swapiTypeToGraphQLType, nodeField} from './relayNode';
-import {getObject, getObjectsByType} from './apiHelper'
+import {getObjectFromTypeAndId, getObjectsByType} from './apiHelper'
 
 
 function rootFieldByID(idName, swapiType) {
+    const getObject = id =>getObjectFromTypeAndId(swapiType,id)
     const args = {};
     args.id = {type: GraphQLID};
     args[idName] = {type: GraphQLID};
     return {
         type: swapiTypeToGraphQLType(swapiType),
         args: args,
-        resolve: (root, args, {loaders}) => {
+        resolve: (_,args) => {
             if (args[idName] !== undefined && args[idName] !== null) {
-                return getObject(root, loaders, swapiType, args);
+                return getObject(args[idName]);
             }
 
             if (args.id !== undefined && args.id !== null) {
@@ -36,7 +37,7 @@ function rootFieldByID(idName, swapiType) {
                 ) {
                     throw new Error('No valid ID extracted from ' + args.id);
                 }
-                return getObject(root, {loaders}, swapiType, globalId, false);
+                return getObject(globalId);
             }
             throw new Error('must provide id or ' + idName);
         },

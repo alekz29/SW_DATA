@@ -5,6 +5,7 @@ import {
 } from 'react-relay';
 import environment from '../Environment'
 import CharacterList from "./CharacterList";
+import '../styles/CharacterListPage.css'
 
 const CharacterListPageQuery = graphql`
     query CharacterListPageQuery(
@@ -27,7 +28,6 @@ export default class CharacterListPage extends React.Component {
                 environment={environment}
                 variables={{
                     count: 10,
-                    cursor: "",
                     id: episodeId,
                 }}
                 query={CharacterListPageQuery}
@@ -36,10 +36,10 @@ export default class CharacterListPage extends React.Component {
                         return <div>Error!</div>;
                     }
                     if (!props) {
-                        return <div className={'dataFetcher'}>Loading...</div>;
+                        return <span className={'loader'}> </span>;
                     }
                     return (
-                        <div className={'list'}>
+                        <div className={'characterList'}>
                             <CharacterList film={props.film} id={episodeId}/>
                         </div>
                     )

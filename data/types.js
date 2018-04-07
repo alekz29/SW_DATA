@@ -1,7 +1,5 @@
 import {GraphQLID, GraphQLInt, GraphQLObjectType, GraphQLString} from "graphql";
-import {getObject} from "./apiHelper";
-import {nodeInterface} from './relayNode';
-import {globalIdField} from 'graphql-relay';
+import {getObjectFromUrl} from "./apiHelper";
 import {connectionFromUrls} from './connections';
 
 const types = {
@@ -20,8 +18,7 @@ const types = {
             id: {type: GraphQLID},
             homeworld: {
                 type: types.PlanetType,
-                resolve: (person, global, {loaders}) =>
-                    getObject(global, loaders, '/planets/', person.homeworld, false)
+                resolve: person => getObjectFromUrl(person.homeworld)
 
             }
         })
@@ -51,7 +48,6 @@ const types = {
             ),
             id: {type: GraphQLID},
 
-            //   interfaces: () => [nodeInterface],
         }),
     })
 }

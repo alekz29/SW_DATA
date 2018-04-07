@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    line-height: 1.4em;
+    vertical-align: baseline;
+    text-decoration: none;
+    outline: 0;
+}
+
+body {
+    background: url("http://s6.ifotos.pl/img/starsjpg_qnspqre.jpg") fixed;
+}
+
+.content {
+    height: 100%;
+}
+
+.header {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header_ST {
+    margin: auto;
+}
+
+
+

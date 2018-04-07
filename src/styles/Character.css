@@ -1,0 +1,7 @@
+.character {
+    margin: 10px;
+    border-bottom: 2px rgb(226, 216, 114) solid;
+    color: rgb(226, 216, 114);
+    font-size: 25px;
+    font-weight: bold;
+}

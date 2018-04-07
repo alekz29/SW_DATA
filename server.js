@@ -3,8 +3,8 @@ import graphQLHTTP from 'express-graphql';
 import path from 'path';
 import WebpackDevServer from 'webpack-dev-server';
 import schema from './data/index';
-import compiler from './config'
-import {loaders} from "./data/apiHelper";
+import config from "./webpack.config";
+
 
 
 export const BASE_URL = 'https://swapi.co/api'
@@ -16,7 +16,6 @@ const graphQLServer = express();
 
 graphQLServer.use('/', graphQLHTTP(req => {
     return {
-        context: {loaders},
         schema: schema,
         graphiql: true,
     }
@@ -26,14 +25,12 @@ graphQLServer.listen(GRAPHQL_PORT, () => console.log(
 ));
 
 
-const app = new WebpackDevServer(compiler, {
-    contentBase: '/public/',
+const app = new WebpackDevServer(config, {
     proxy: {'/graphql': `http://localhost:${GRAPHQL_PORT}`},
-    publicPath: '/dist/',
     stats: {colors: true},
 });
 
-app.use('/', express.static(path.resolve(__dirname, 'public')));
+app.use('/', express.static(path.resolve(__dirname, 'dist')));
 app.listen(APP_PORT, () => {
     console.log(`App is now running on http://localhost:${APP_PORT}`);
 });

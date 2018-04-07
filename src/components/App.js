@@ -2,12 +2,13 @@ import React, {Component} from 'react'
 import {Switch, Route} from 'react-router-dom'
 import Menu from './Menu'
 import CharactersView from "./views/CharactersView";
+import '../styles/App.css'
 
 class App extends Component {
     render() {
         return (
             <div>
-                <header className={'header'}> STAR WARS-img</header>
+                <header className={'header'}><img  className={'header_ST'} src={'https://upload.wikimedia.org/wikipedia/commons/2/21/Star_Wars_logo.png'}/></header>
                 <section className={'content'}>
                     <Menu/>
                     <div>

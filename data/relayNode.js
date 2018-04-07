@@ -1,10 +1,9 @@
-import type {GraphQLObjectType} from 'graphql';
 import {nodeDefinitions, fromGlobalId} from 'graphql-relay';
-import {getObject} from "./apiHelper";
+import {getObjectFromTypeAndId} from "./apiHelper";
 import types from './types'
 
 
-export function swapiTypeToGraphQLType(swapiType: string): GraphQLObjectType {
+export function swapiTypeToGraphQLType(swapiType) {
     const FilmType = types.FilmType
     const PersonType = types.PersonType
     const PlanetType = types.PlanetType
@@ -24,7 +23,7 @@ export function swapiTypeToGraphQLType(swapiType: string): GraphQLObjectType {
 const {nodeInterface, nodeField} = nodeDefinitions(
     globalId => {
         const {type, id} = fromGlobalId(globalId);
-        return getObject(type, id);
+        return getObjectFromTypeAndId(type, id);
     },
     obj => {
         const parts = obj.url.split('/');

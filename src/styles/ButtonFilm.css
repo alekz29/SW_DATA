@@ -1,0 +1,24 @@
+
+.episode {
+    display: flex;
+    justify-content: space-around;
+}
+
+.episode_button {
+    font: inherit;
+    color: #E2D872;
+    margin: 1px;
+    text-align: center;
+    padding: 15px;
+    border-bottom: 2px solid rgba(211, 174, 0, 0.7);
+}
+
+.episode_button:hover {
+    color: #fff8c6;
+    border-bottom: solid 2px #E2D872;
+}
+
+.episode_button:focus {
+    color: #fff8c6;
+    border-bottom: solid 2px #E2D872;
+}

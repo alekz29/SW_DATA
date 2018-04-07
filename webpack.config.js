@@ -1,9 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
 const distDir = path.resolve(__dirname, 'dist');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const config = webpack({
-    entry: ['whatwg-fetch', './js/index.js' /*path.resolve(__dirname, 'js', 'index.js')*/],
+module.exports = webpack({
+    entry: ['whatwg-fetch', './src/index.js'],
     module: {
         loaders: [
             {
@@ -39,6 +40,13 @@ const config = webpack({
             }
         ],
     },
-    output: {filename: 'app.js', path: distDir},
+    devServer: {
+        contentBase: distDir
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'static/index.html'
+        })
+    ],
+    output: {filename: 'bundle.js', path: distDir},
 });
-export default config

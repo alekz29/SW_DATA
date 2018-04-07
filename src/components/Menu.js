@@ -5,10 +5,11 @@ import {
 } from 'react-relay';
 import environment from '../Environment'
 import SelectedFilm from "./SelectedFilm";
+import '../styles/Menu.css'
 
 const MenuQuery = graphql`
     query MenuQuery{
-            ...SelectedFilm_selected
+        ...SelectedFilm_selected
     }
 `
 
@@ -23,11 +24,11 @@ export default class Menu extends React.Component {
                         return <div>Error!</div>;
                     }
                     if (!props) {
-                        return <div className={'dataFetcher'}>Loading...</div>;
+                        return <span className={'loader'}> </span>;
                     }
                     return (
                         <div >
-                           <SelectedFilm selected={props}/>
+                            <SelectedFilm selected={props}/>
                         </div>
                     )
                 }}

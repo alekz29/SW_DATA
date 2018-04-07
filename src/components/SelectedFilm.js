@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {createFragmentContainer, graphql} from 'react-relay'
 import ButtonFilm from './ButtonFilm'
+import '../styles/SelectedFilm.css'
 
 
 class SelectedFilm extends Component {

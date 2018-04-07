@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {createFragmentContainer, graphql} from 'react-relay'
+import '../styles/Character.css'
 
 
 class Character extends Component {
